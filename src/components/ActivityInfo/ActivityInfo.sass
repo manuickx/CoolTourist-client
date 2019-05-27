@@ -1,0 +1,44 @@
+.info-page
+    margin: 2px 0
+    display: flex
+    flex-wrap: flex
+    border: solid 5px blue
+    .sidebar
+        border-style: solid
+        width: 350px
+        display: grid
+        grid-template-rows: auto auto
+        background-color: rgb(13, 177, 240)
+        height: 90vh
+        button
+            display: block
+            border-style: none
+            color: white
+            background: transparent
+            font-size: 15px
+            cursor: pointer
+            margin: 10px
+    .activity-details
+        // width: 3500px
+        border-style: solid
+        .activity-image-container
+            pading: 2px
+            .activity-image
+                height: 380px
+                width: 480px
+                margin: 2px
+    .activity-booking
+        display: grid
+        grid-template-rows: auto auto
+        border-style: solid
+        .booking-form-container
+            height: 45vh
+            border: solid
+            button
+                font-size: 35px
+                cursor: pointer
+                border-radius: 5px
+                border: none
+                &:hover
+                    background-color: #45a049
+                    color: white
