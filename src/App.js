@@ -12,7 +12,7 @@ import EditUserProfile from './components/EditUserProfile/EditUserProfile';
 import ActivityInfo from './components/ActivityInfo/ActivityInfo';
 import NewActivityForm from './components/NewActivityForm/NewActivityForm';
 import EditActivityForm from './components/EditActivityForm/EditActivityForm';
-import PageNotFound from './components/PageNotFound/PageNotFound';
+import PageNotFound from './components/InfoPages/PageNotFound';
 import BookingForm from './components/BookingForm/BookingForm';
 
 import './App.sass'

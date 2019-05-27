@@ -118,7 +118,8 @@ class NewActivityForm extends Component {
                             <textarea
                                 id="activityDescription"
                                 name="activityDescription"
-                                placeholder="Write something about your activity..."
+                                maxLength="1500"
+                                placeholder="Write something about your activity (max 1500 chars)..."
                                 required
                                 value={activityDescription}
                                 onChange={handleChange}>
@@ -142,6 +143,7 @@ class NewActivityForm extends Component {
                         </div>
                     </div>
                     <div className="row">
+                        <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
                         <button type="submit" className="submit-button">SUBMIT ACTIVITY</button>
                         {/* <input type="submit" value="SUBMIT ACTIVITY" /> */}
                     </div>

@@ -7,7 +7,6 @@ class EditUserProfile extends Component {
     state = {
         name: this.props.currentUser.name,
         email: this.props.currentUser.email,
-        // password: ""
     }
 
     updateUser = () => {
@@ -15,7 +14,6 @@ class EditUserProfile extends Component {
             id: this.props.currentUser.id,
             name: this.state.name,
             email: this.state.email,
-            // password: this.state.password
         }
         API.updateUser(user)
             .then(user => {
@@ -50,7 +48,7 @@ class EditUserProfile extends Component {
             }
         }
 
-        const { name, email, password } = this.state
+        const { name, email } = this.state
         const { currentUser } = this.props
         return (
             <div className="wrapper fadeInDown">

@@ -105,7 +105,6 @@ class API {
         return fetch(this.baseUrl + `/activities/${activity.id}`, {
             method: 'DELETE'
         }).then(resp => resp.json())
-            .then(console.log)
     }
 
     static bookActivity = (activityId, booking) => {
