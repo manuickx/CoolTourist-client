@@ -14,6 +14,8 @@ import NewActivityForm from './components/NewActivityForm/NewActivityForm';
 import EditActivityForm from './components/EditActivityForm/EditActivityForm';
 import PageNotFound from './components/InfoPages/PageNotFound';
 import BookingForm from './components/BookingForm/BookingForm';
+import NotVerified from './components/InfoPages/NotVerified';
+import PleaseLogIn from './components/InfoPages/PleaseLogIn';
 
 import './App.sass'
 
@@ -27,20 +29,11 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    // API.getCategories()
-    //   .then(categories => this.setState({ categories }))
-    // API.getAllActivities()
-    //   .then(activities => this.setState({ activities }))
-    // const token = localStorage.getItem('token')
-    // if (token) {
-    //   API.getCurrentUser(token)
-    //     .then(user => this.setState({ currentUser: user, userActivities: user.activities }))
-    // }
     const token = localStorage.getItem('token')
     this.getCategories()
     this.getActivities()
-    this.getCurrentUser(token)
-
+    if (token)
+      this.getCurrentUser(token)
   }
 
   getCategories = () => {
@@ -79,30 +72,71 @@ class App extends Component {
 
   render() {
     const { currentUser, activities, userActivities } = this.state
-    const { handleLogout, deleteActivity, getCurrentUser, addNewActivity, deleteUser } = this
+    const { handleLogout, deleteActivity, getCurrentUser, addNewActivity, deleteUser, getActivities } = this
 
     return (
       <div className="app">
         <Navbar handleLogout={handleLogout} currentUser={currentUser} />
         <Switch>
           <Route exact path='/' component={LandingPage} />
-          <Route exact path='/activities' render={(props) => <ShowPage {...props} activities={activities} />} />
-          <Route exact path='/activities/:activityId' render={(props) => <ActivityInfo {...props} currentUser={currentUser} deleteActivity={deleteActivity} />} />
-          <Route exact path='/activities/:activityId/edit' render={(props) => <EditActivityForm {...props} currentUser={currentUser} deleteActivity={deleteActivity} />} />
-          <Route exact path='/activities/:activityId/book' render={(props) => <BookingForm {...props}  />} />
-          <Route exact path='/login' render={(props) => <UserLoginNew {...props} getCurrentUser={getCurrentUser} />} />
-          <Route exact path='/signup' render={(props) => <UserSignupNew {...props} getCurrentUser={getCurrentUser} />} />
+          <Route exact path='/activities'
+            render={(props) =>
+              <ShowPage {...props} activities={activities} />
+            }
+          />
+          <Route exact path='/activities/:activityId'
+            render={(props) =>
+              <ActivityInfo {...props} currentUser={currentUser} deleteActivity={deleteActivity} />
+            }
+          />
+          <Route exact path='/activities/:activityId/edit'
+            render={(props) =>
+              currentUser ?
+                <EditActivityForm {...props} currentUser={currentUser} deleteActivity={deleteActivity} getActivities={getActivities} />
+                :
+                null
+            }
+          />
+          <Route exact path='/activities/:activityId/book'
+            render={(props) =>
+              <BookingForm {...props} />
+            }
+          />
+          <Route exact path='/login'
+            render={(props) =>
+              <UserLoginNew {...props} getCurrentUser={getCurrentUser} />
+            }
+          />
+          <Route exact path='/signup'
+            render={(props) =>
+              <UserSignupNew {...props} getCurrentUser={getCurrentUser} />
+            }
+          />
           <Route exact path='/user/profile' render={(props) =>
             currentUser ?
               currentUser.verified ?
                 <UserProfile {...props} currentUser={currentUser} userActivities={userActivities} deleteUser={deleteUser} />
                 :
-                "Not verified"
+                <NotVerified {...props} />
               :
-              "Log in"
+              <PleaseLogIn {...props} />
           } />
-          <Route exact path='/user/edit' render={(props) => currentUser ? <EditUserProfile {...props} currentUser={currentUser} getCurrentUser={getCurrentUser} /> : null} />
-          <Route exact path='/user/new_activity' render={(props) => <NewActivityForm {...props} addNewActivity={addNewActivity} updateUser={this.updateUser} />} />
+          <Route exact path='/user/edit'
+            render={(props) =>
+              currentUser ?
+                <EditUserProfile {...props} currentUser={currentUser} getCurrentUser={getCurrentUser} />
+                :
+                <PleaseLogIn {...props} />
+            }
+          />
+          <Route exact path='/user/new_activity'
+            render={(props) =>
+              currentUser ?
+                <NewActivityForm {...props} addNewActivity={addNewActivity} updateUser={this.updateUser} />
+                :
+                <PleaseLogIn {...props} />
+            }
+          />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>

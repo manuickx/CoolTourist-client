@@ -11,7 +11,7 @@ class Navbar extends Component {
                 {this.props.currentUser && !this.props.currentUser.error ?
                     <div>
                         <div className="navbar-logo">
-                            <Link to='/'><button><i className="fas fa-bicycle"></i></button></Link>
+                            <Link to='/'><button>CoolTourist</button></Link>
                             <Link to='/activities'><button><i className="fas fa-hiking"></i> ACTIVITIES</button></Link>
                         </div>
                         <div className="navbar-buttons">
@@ -22,7 +22,7 @@ class Navbar extends Component {
                     :
                     <div>
                         <div className="navbar-logo">
-                            <Link to='/'><button><i className="fas fa-bicycle"></i></button></Link>
+                            <Link to='/'><button>CoolTourist</button></Link>
                             <Link to='/activities'><button><i className="fas fa-hiking"></i> ACTIVITIES</button></Link>
                         </div>
                         <div className="navbar-buttons">

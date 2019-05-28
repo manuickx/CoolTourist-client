@@ -145,7 +145,6 @@ class NewActivityForm extends Component {
                     <div className="row">
                         <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
                         <button type="submit" className="submit-button">SUBMIT ACTIVITY</button>
-                        {/* <input type="submit" value="SUBMIT ACTIVITY" /> */}
                     </div>
                 </form>
             </div>

@@ -146,6 +146,7 @@ class BookingForm extends Component {
                             </div>
                         </div>
                         <div className="row">
+                            <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
                             <button type="submit" className="submit-button">SUBMIT BOOKING</button>
                         </div>
                     </form>

@@ -103,7 +103,7 @@ class API {
 
     static deleteActivity = activity => {
         return fetch(this.baseUrl + `/activities/${activity.id}`, {
-            method: 'DELETE'
+            method: "DELETE"
         }).then(resp => resp.json())
     }
 
@@ -120,6 +120,12 @@ class API {
                 date: booking.date
             })
         })
+    }
+
+    static deleteBooking = booking => {
+        return fetch(this.baseUrl+`/bookings/${booking.id}`, {
+            method: "DELETE"
+        }).then(resp => resp.json())
     }
 
 }
