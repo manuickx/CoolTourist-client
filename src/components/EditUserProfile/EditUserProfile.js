@@ -87,6 +87,12 @@ class EditUserProfile extends Component {
                             className="fadeIn third"
                             value="Update"
                         />
+                        <input
+                            type="button"
+                            className="fadeIn fourth"
+                            value="Back"
+                            onClick={() => this.props.history.goBack()}
+                        />
                     </form>
                     <div id="formFooter">
                         {/* <a className="underlineHover" href="/">Forgot Password?</a> */}

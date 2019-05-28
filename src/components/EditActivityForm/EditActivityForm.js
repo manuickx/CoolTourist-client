@@ -5,8 +5,11 @@ import API from '../../API';
 class EditActivityForm extends Component {
 
     state = {
-        activity: null,
-        actName: ""
+        id: "",
+        name: "",
+        imageUrl: "",
+        description: "",
+        price: ""
     }
 
     componentDidMount() {
@@ -15,38 +18,130 @@ class EditActivityForm extends Component {
 
     getActivity = () => {
         API.getOneActivity(this.props.match.params.activityId)
-            .then(activity => this.setState({ activity }))
+            .then(activity => this.setState({
+                id: activity.id,
+                name: activity.name,
+                imageUrl: activity.imageurl,
+                description: activity.description,
+                price: activity.price
+            }))
     }
 
     handleChange = (event) => {
         this.setState({ [event.target.id]: event.target.value })
     }
 
-    // updateActivity = (activity) => {
-    //     API.editActivity(activity)
-    // }
-
-    // handleSubmit = (event) => {
-    //     event.preventDefault()
-    //     this.updateActivity({ id: this.state.activity.id, name: this.state.actName })
-    //         .then(this.setState({ actName: "" }))
-    //         .then(this.props.history.push('/user/profile'))
-    // }
+    updateActivity = (event) => {
+        event.preventDefault()
+        const activity = {
+            id: this.state.id,
+            name: this.state.name,
+            imageurl: this.state.imageUrl,
+            description: this.state.description,
+            price: this.state.price 
+        }
+        API.editActivity(activity)
+        .then(this.props.getActivities())
+        this.props.history.push('/user/profile')
+    }
 
     render() {
+
+        const { handleChange } = this
+        const { name, imageUrl, description, price } = this.state
+
         return (
-            <form className='new-activity-form' onSubmit={this.handleSubmit}>
-                <div className='activity-details'>
-                    <input className='new-activity-name'
-                        type='text'
-                        id='actName'
-                        placeholder='activity name'
-                        value={this.state.actName}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+            <div className="container">
+                <form action="/action_page.php" onSubmit={this.updateActivity}>
+                    <div className="row">
+                        <div className="col-25">
+                            <label>Activity Name</label>
+                        </div>
+                        <div className="col-75">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Activity name..."
+                                required
+                                value={name}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-25">
+                            <label>Image url</label>
+                        </div>
+                        <div className="col-75">
+                            <input
+                                type="text"
+                                id="imageUrl"
+                                name="imageUrl"
+                                placeholder="Image Url..."
+                                required
+                                value={imageUrl}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    {/* <div className="row">
+                        <div className="col-25">
+                            <label>Select categories</label>
+                        </div>
+                        <div className="col-75">
+                            <Select
+                                onChange={handleCategoryChange}
+                                className="multi-select"
+                                classNamePrefix="react-select"
+                                placeholder="Choose a Category"
+                                isMulti
+                                required
+                                options={categories}
+                                isSearchable={true}
+                            />
+                        </div>
+                    </div> */}
+                    <div className="row">
+                        <div className="col-25">
+                            <label>Description</label>
+                        </div>
+                        <div className="col-75">
+                            <textarea
+                                id="description"
+                                name="description"
+                                maxLength="1500"
+                                placeholder="Write something about your activity (max 1500 chars)..."
+                                required
+                                value={description}
+                                onChange={handleChange}
+                            >
+                            </textarea>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-25">
+                            <label>Price</label>
+                        </div>
+                        <div className="col-75">
+                            <input
+                                type="number"
+                                min="0"
+                                id="price"
+                                name="price"
+                                placeholder="Price.."
+                                required
+                                value={price}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
+                        <button type="submit" className="submit-button">SUBMIT ACTIVITY</button>
+                    </div>
+                </form>
+            </div>
         );
     }
 }

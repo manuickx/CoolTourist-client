@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 
 import './InfoPages.sass'
 
-class NotVerified extends Component {
+class PleaseLogIn extends Component {
     render() {
         return (
-            <div className="not-verified">
-                <h5>Waiting for verification...</h5>
+            <div className="not-logged-in">
+                <h5>Please log in to access this page</h5>
                 <hr></hr>
+                <button onClick={() => this.props.history.goBack()}>GO BACK</button>
                 <Link to='/'><button>HOME</button></Link>
             </div>
         );
     }
 }
 
-export default NotVerified;
+export default PleaseLogIn;

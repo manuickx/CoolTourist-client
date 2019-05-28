@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import API from '../../API';
 
+import './UserProfile.sass'
+
 class UserProfile extends Component {
 
     deleteUser = () => {
@@ -12,9 +14,13 @@ class UserProfile extends Component {
                     this.props.deleteUser()
                     this.props.history.push('/')
                 } else {
-                    alert("You can't delete this user. You have active offers." )
+                    alert("You can't delete this user. You have active offers.")
                 }
             })
+    }
+
+    addDefaultSrc(ev) {
+        ev.target.src = 'http://clipart-library.com/images/8iGbXE5aT.png'
     }
 
     render() {
@@ -22,12 +28,22 @@ class UserProfile extends Component {
             return <div>Loading...</div>
         } else {
             return (
-                <div>
-                    <h1>{this.props.currentUser.name}</h1>
-                    <ul>{this.props.userActivities.map((activity) => <li key={activity.id}><Link to={`/activities/${activity.id}`}>{activity.name}</Link></li>)}</ul>
-                    <Link to="/user/edit"><button>edit profile</button></Link>
-                    <button onClick={() => { if (window.confirm('Are you sure you wish to delete this user?')) this.deleteUser() }}>delete user</button>
-                    {/* <Link to="/user/new_activity"><button>Create new activity</button></Link> */}
+                <div className="user-info-page">
+                    <div className="sidebar">
+                        <div>
+                            <Link to="/user/edit"><button>EDIT PROFILE <i className="fas fa-user-edit"></i></button></Link>
+                            <hr></hr>
+                            <button onClick={() => { if (window.confirm('Are you sure you wish to delete this user?')) this.deleteUser() }}>DELETE USER <i className="fas fa-user-minus"></i></button>
+                            <hr></hr>
+                            <Link to="/user/new_activity"><button>NEW ACTIVITY <i className="fas fa-plus-square"></i></button></Link>
+                            <hr></hr>
+                        </div>
+                    </div>
+                    <div className="user-info">
+                        <img className = "user-avatar" src={this.props.currentUser.avatar} onError={this.addDefaultSrc} alt="" />
+                        <h1>{this.props.currentUser.name}</h1>
+                        <ul>{this.props.userActivities.map((activity) => <li key={activity.id}><Link to={`/activities/${activity.id}`}>{activity.name}</Link></li>)}</ul>
+                    </div>
                 </div>
 
             )
