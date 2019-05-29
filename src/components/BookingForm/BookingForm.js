@@ -79,6 +79,13 @@ class BookingForm extends Component {
                                 showTimeSelect
                                 dateFormat="Pp"
                                 onChange={this.handleDateChange}
+                                withPortal
+                                showYearDropdown
+                                scrollableYearDropdown
+                                yearDropdownItemNumber={15}
+                                showMonthDropdown
+                                useShortMonthInDropdown
+                                showWeekNumbers
                             />
                         </div>
                         <div className="row">

@@ -17,7 +17,7 @@ class ActivityCard extends Component {
                         <img src={this.props.activity.imageurl} onError={this.addDefaultSrc} alt="" />
                     </div>
                     <div className="product-details">
-                        {/* <span className="product-category">{this.props.activity.categories.map(category => category.name).join(', ')}</span> */}
+                        <span className="product-category">{this.props.activity.categories.map(category => category.name).join(', ')}</span>
                         <h4><span>{this.props.activity.name}</span></h4>
                         <div className="product-description">
                             <p>{this.props.activity.description.substring(0, 120)} {this.props.activity.description.length > 120 ? "...READ MORE" : null}</p>

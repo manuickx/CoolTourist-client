@@ -87,10 +87,12 @@ class EditUserProfile extends Component {
                             className="fadeIn third"
                             value="Update"
                         />
+                        <br></br>
                         <input
                             type="button"
                             className="fadeIn fourth"
                             value="Back"
+                            id="back-button"
                             onClick={() => this.props.history.goBack()}
                         />
                     </form>

@@ -27,7 +27,6 @@ class ActivityInfo extends Component {
     }
 
     handleDelete = activity => {
-        console.log(activity.bookings)
         activity.bookings.length === 0 ?
             API.deleteActivity(this.state.activity)
                 .then(resp => {
@@ -49,7 +48,7 @@ class ActivityInfo extends Component {
                     alert("booking couldn't be deleted, please try again")
                 }
             })
-        this.props.history.push('/user/profile')
+        this.props.history.push('/activities')
         this.setState({ selectedBooking: null, bookings: this.state.bookings.filter(book => book.id !== booking.id) })
     }
 
@@ -108,7 +107,8 @@ class ActivityInfo extends Component {
                             <hr></hr>
                             <br></br>
                             <h3>Activity categories:</h3>
-                            <h3>{categories.map(category => category.name).join(' ')}</h3>
+                            <ul></ul>
+                            <h3>{categories.map(category => <li>{category.name}</li>)}</h3>
 
                         </div>
                     </div>
@@ -126,7 +126,7 @@ class ActivityInfo extends Component {
                                     <hr></hr>
                                     <br></br>
                                     {selectedBooking ?
-                                        <div>
+                                        <div className="full-booking-details">
                                             <p>NAME: {selectedBooking.name}</p>
                                             <p>EMAIL: {selectedBooking.email}</p>
                                             <p>PHONE: {selectedBooking.phone}</p>
