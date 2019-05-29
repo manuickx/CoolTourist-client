@@ -19,7 +19,7 @@ class UserSignupNew extends Component {
                 localStorage.setItem("token", authData.jwt);
                 this.props.history.push("/user/profile");
                 API.getCurrentUser(authData.jwt)
-                    .then(user => this.props.getCurrentUser(user))
+                this.props.getCurrentUser(authData.jwt)
             })
     }
 

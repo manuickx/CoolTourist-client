@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import API from '../../API';
+import NotAllowed from '../InfoPages/NotAllowed';
 
 class EditActivityForm extends Component {
 
@@ -38,54 +39,56 @@ class EditActivityForm extends Component {
             name: this.state.name,
             imageurl: this.state.imageUrl,
             description: this.state.description,
-            price: this.state.price 
+            price: this.state.price
         }
         API.editActivity(activity)
-        .then(this.props.getActivities())
+            .then(this.props.getActivities())
         this.props.history.push('/user/profile')
     }
 
     render() {
 
-        const { handleChange } = this
-        const { name, imageUrl, description, price } = this.state
+        if (this.props.currentUser.activities.find(activity => activity.id === this.state.id)) {
 
-        return (
-            <div className="container">
-                <form action="/action_page.php" onSubmit={this.updateActivity}>
-                    <div className="row">
-                        <div className="col-25">
-                            <label>Activity Name</label>
+            const { handleChange } = this
+            const { name, imageUrl, description, price } = this.state
+
+            return (
+                <div className="container">
+                    <form action="/action_page.php" onSubmit={this.updateActivity}>
+                        <div className="row">
+                            <div className="col-25">
+                                <label>Activity Name</label>
+                            </div>
+                            <div className="col-75">
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Activity name..."
+                                    required
+                                    value={name}
+                                    onChange={handleChange}
+                                />
+                            </div>
                         </div>
-                        <div className="col-75">
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Activity name..."
-                                required
-                                value={name}
-                                onChange={handleChange}
-                            />
+                        <div className="row">
+                            <div className="col-25">
+                                <label>Image url</label>
+                            </div>
+                            <div className="col-75">
+                                <input
+                                    type="text"
+                                    id="imageUrl"
+                                    name="imageUrl"
+                                    placeholder="Image Url..."
+                                    required
+                                    value={imageUrl}
+                                    onChange={handleChange}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-25">
-                            <label>Image url</label>
-                        </div>
-                        <div className="col-75">
-                            <input
-                                type="text"
-                                id="imageUrl"
-                                name="imageUrl"
-                                placeholder="Image Url..."
-                                required
-                                value={imageUrl}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                    {/* <div className="row">
+                        {/* <div className="row">
                         <div className="col-25">
                             <label>Select categories</label>
                         </div>
@@ -102,47 +105,50 @@ class EditActivityForm extends Component {
                             />
                         </div>
                     </div> */}
-                    <div className="row">
-                        <div className="col-25">
-                            <label>Description</label>
+                        <div className="row">
+                            <div className="col-25">
+                                <label>Description</label>
+                            </div>
+                            <div className="col-75">
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    maxLength="1500"
+                                    placeholder="Write something about your activity (max 1500 chars)..."
+                                    required
+                                    value={description}
+                                    onChange={handleChange}
+                                >
+                                </textarea>
+                            </div>
                         </div>
-                        <div className="col-75">
-                            <textarea
-                                id="description"
-                                name="description"
-                                maxLength="1500"
-                                placeholder="Write something about your activity (max 1500 chars)..."
-                                required
-                                value={description}
-                                onChange={handleChange}
-                            >
-                            </textarea>
+                        <div className="row">
+                            <div className="col-25">
+                                <label>Price</label>
+                            </div>
+                            <div className="col-75">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    id="price"
+                                    name="price"
+                                    placeholder="Price.."
+                                    required
+                                    value={price}
+                                    onChange={handleChange}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-25">
-                            <label>Price</label>
+                        <div className="row">
+                            <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
+                            <button type="submit" className="submit-button">SUBMIT ACTIVITY</button>
                         </div>
-                        <div className="col-75">
-                            <input
-                                type="number"
-                                min="0"
-                                id="price"
-                                name="price"
-                                placeholder="Price.."
-                                required
-                                value={price}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <button className="back-button" onClick={() => this.props.history.goBack()}>BACK</button>
-                        <button type="submit" className="submit-button">SUBMIT ACTIVITY</button>
-                    </div>
-                </form>
-            </div>
-        );
+                    </form>
+                </div>
+            );
+        } else {
+            return <NotAllowed />
+        }
     }
 }
 

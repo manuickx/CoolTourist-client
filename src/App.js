@@ -94,7 +94,7 @@ class App extends Component {
               currentUser ?
                 <EditActivityForm {...props} currentUser={currentUser} deleteActivity={deleteActivity} getActivities={getActivities} />
                 :
-                null
+                <PleaseLogIn {...props} />
             }
           />
           <Route exact path='/activities/:activityId/book'
