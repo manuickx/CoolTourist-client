@@ -6,20 +6,29 @@
     background-color: rgb(13, 177, 240)
     box-shadow: 10px 10px 10px grey
     z-index: 5
-    .navbar-logo
-        float: left
-    .navbar-buttons
-        float: right
-    button  
-        margin: 20px 10px    
-        border-style: none
-        background-color: transparent
-        color: white
-        font-size: 20px
-        cursor: pointer
-        &:active
-            transform: translateY(3px)
-        &:disabled
-            cursor: auto
+    .navbar-elements-container
+        display: grid
+        grid-template-columns: 20% 40% 40%
+        .navbar-logo
+            float: left
+            overflow: hidden
+        .filter-section
+            margin: 15px 80px
+            width: 100%
+        .navbar-buttons
+            position: absolute
+            right: 5px
+            overflow: hidden
+        button  
+            margin: 20px 10px    
+            border-style: none
+            background-color: transparent
+            color: white
+            font-size: 20px
+            cursor: pointer
+            &:active
+                transform: translateY(3px)
+            &:disabled
+                cursor: auto
 
 

@@ -59,6 +59,11 @@ class API {
             .then(resp => resp.json())
     }
 
+    static getOneCategory = categoryId => {
+        return fetch (this.baseUrl + `/categories/${categoryId}`)
+        .then(resp => resp.json())
+    }
+
     //ACTIVITIES FUNCTIONS
 
     static getAllActivities = () => {

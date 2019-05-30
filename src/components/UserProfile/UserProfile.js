@@ -135,18 +135,8 @@ class UserProfile extends Component {
                                                 </tbody>
                                             </table>
                                             :
-                                            this.state.userActivities.map(activity =>
-                                                <table className="user-bookings-details-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>{activity.name}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {activity.bookings.map(booking => <tr><td>{booking.name} {booking.date.substring(0, 4)}-{booking.date.substring(5, 7)}-{booking.date.substring(8, 10)} {booking.date.substring(11, 16)}</td></tr>)}
-                                                    </tbody>
-                                                </table>
-                                            )
+                                            // 
+                                            null
                                     }
                                 </div>
                             </div>

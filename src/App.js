@@ -25,6 +25,7 @@ class App extends Component {
     currentUser: null,
     categories: [],
     activities: [],
+    // filteredActivities: [],
     userActivities: []
   }
 
@@ -35,6 +36,11 @@ class App extends Component {
     if (token)
       this.getCurrentUser(token)
   }
+
+  // filterActivities = category => {
+  //   this.setState({filteredActivities: [...this.state.filteredActivities, this.state.activities.filter(activity => activity.categories.filter(categ => categ.name === category.label))]
+  //       })
+  // }
 
   getCategories = () => {
     API.getCategories()
@@ -76,7 +82,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <Navbar handleLogout={handleLogout} currentUser={currentUser} />
+        <Navbar handleLogout={handleLogout} currentUser={currentUser} filterActivities={this.filterActivities} categories={this.state.categories} />
         <Switch>
           <Route exact path='/' component={LandingPage} />
           <Route exact path='/activities'
