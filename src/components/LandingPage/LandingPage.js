@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Parallax } from 'react-parallax';
-import LazyHero from 'react-lazy-hero';
 
 import './LandingPage.sass'
 
